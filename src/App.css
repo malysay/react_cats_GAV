@@ -12,26 +12,26 @@
 }
 
 button {
-  background-color: #4CAF50; /* Зеленый цвет фона */
-  border: none; /* Без границы */
-  color: white; /* Белый текст */
-  padding: 15px 32px; /* Внутренние отступы */
-  text-align: center; /* Текст по центру */
-  text-decoration: none; /* Без подчеркивания */
-  display: inline-block; /* Для отображения кнопкой */
-  font-size: 16px; /* Размер шрифта */
-  margin: 20px; /* Отступы */
-  transition-duration: 0.4s; /* Плавный переход при наведении */
-  cursor: pointer; /* Изменение курсора на указатель */
-  border-radius: 12px; /* Скругленные углы */
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Тень для кнопки */
+  background-color: #4CAF50;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 20px; 
+  transition-duration: 0.4s;
+  cursor: pointer; 
+  border-radius: 12px; 
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 button:hover {
-  background-color: white; /* Фон станет белым при наведении */
-  color: #4CAF50; /* Текст станет зеленым при наведении */
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Увеличение тени при наведении */
-  border: 2px solid #4CAF50; /* Появится зеленая граница */
+  background-color: white;
+  color: #4CAF50;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  border: 2px solid #4CAF50;
 }
 
 .App-header {
