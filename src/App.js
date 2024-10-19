@@ -1,25 +1,29 @@
-import logo from './logo.svg';
 import './App.css';
+import { useState } from 'react';
 
 function App() {
+  const cats = [
+    '/cat1.jpg',
+    '/cat2.jpg',
+    '/cat3.jpg',
+  ];
+
+  const [currentImage, setCurrentImage] = useState(cats[0]);
+
+  const getRandomImage = () => {
+    const randomIndex = Math.floor(Math.random() * cats.length);
+    setCurrentImage(cats[randomIndex]);
+  };
+
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <img src={currentImage} className="App-logo" alt="Random Cat" />
+        <button onClick={getRandomImage}>Показать котят!</button>
       </header>
     </div>
   );
 }
+
 
 export default App;
