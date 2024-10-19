@@ -1,0 +1,59 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+.App-header {
+  text-align: center;
+}
+
+button {
+  background-color: #4CAF50; /* Зеленый цвет фона */
+  border: none; /* Без границы */
+  color: white; /* Белый текст */
+  padding: 15px 32px; /* Внутренние отступы */
+  text-align: center; /* Текст по центру */
+  text-decoration: none; /* Без подчеркивания */
+  display: inline-block; /* Для отображения кнопкой */
+  font-size: 16px; /* Размер шрифта */
+  margin: 20px; /* Отступы */
+  transition-duration: 0.4s; /* Плавный переход при наведении */
+  cursor: pointer; /* Изменение курсора на указатель */
+  border-radius: 12px; /* Скругленные углы */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Тень для кнопки */
+}
+
+button:hover {
+  background-color: white; /* Фон станет белым при наведении */
+  color: #4CAF50; /* Текст станет зеленым при наведении */
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Увеличение тени при наведении */
+  border: 2px solid #4CAF50; /* Появится зеленая граница */
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
