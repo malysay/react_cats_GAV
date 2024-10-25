@@ -1,12 +1,8 @@
-import './App.css';
-import { useState } from 'react';
+import React from "react";
+import { useState } from "react";
 
-function App() {
-  const cats = [
-    '/cat1.jpg',
-    '/cat2.jpg',
-    '/cat3.jpg',
-  ];
+export function RandomCat() {
+  const cats = ["/cat1.jpg", "/cat2.jpg", "/cat3.jpg"];
 
   const [currentImage, setCurrentImage] = useState(cats[0]);
 
@@ -24,6 +20,3 @@ function App() {
     </div>
   );
 }
-
-
-export default App;
