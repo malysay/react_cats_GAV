@@ -33,21 +33,42 @@ function LinearRegressionChart() {
   const [pm25, setPm25] = useState<number[]>(defaultPm25);
   const [cov, setCov] = useState<number[]>(defaultCov);
   const [showChart, setShowChart] = useState<boolean>(false);
+  const [slope, setSlope] = useState<number | null>(null);
+  const [intercept, setIntercept] = useState<number | null>(null);
+  const [predictions, setPredictions] = useState<number[]>([]);
 
-  // Функция расчета коэффициентов регрессии
-  const regression = (x: number[], y: number[]) => {
-    const n = x.length;
-    const xMean = x.reduce((a, b) => a + b, 0) / n;
-    const yMean = y.reduce((a, b) => a + b, 0) / n;
-    const slope =
-      x.reduce((sum, xi, i) => sum + (xi - xMean) * (y[i] - yMean), 0) /
-      x.reduce((sum, xi) => sum + Math.pow(xi - xMean, 2), 0);
-    const intercept = yMean - slope * xMean;
+  // Функция для загрузки Pyodide и выполнения Python кода
+  const runPythonCode = async () => {
+    const pyodide = await (window as any).loadPyodide();
+    await pyodide.loadPackage("numpy");
+    await pyodide.loadPackage("scikit-learn");
+    
+    const pythonCode = `
+      import numpy as np
+      from sklearn.linear_model import LinearRegression
 
-    return { slope, intercept };
+      origpm25 = np.array(${JSON.stringify(pm25)});
+      origcov = np.array(${JSON.stringify(cov)});
+
+      X = origpm25.reshape(-1, 1)
+      y = origcov
+
+      model = LinearRegression()
+      model.fit(X, y)
+
+      predictions = model.predict(X)
+      slope = model.coef_[0]
+      intercept = model.intercept_
+
+      (slope, intercept, predictions.tolist())
+    `;
+    
+    // Запуск кода на Python
+    const results = await pyodide.runPythonAsync(pythonCode);
+    setSlope(results[0]);
+    setIntercept(results[1]);
+    setPredictions(results[2]);
   };
-
-  const { slope, intercept } = regression(pm25, cov);
 
   // Подготовка данных для отображения
   const data = {
@@ -60,7 +81,9 @@ function LinearRegressionChart() {
       },
       {
         label: "Regression Line",
-        data: pm25.map((x) => ({ x, y: slope * x + intercept })) as PointData[],
+        data: pm25.map((x, i) => ({
+          x, y: predictions[i] !== undefined ? predictions[i] : null,
+        })) as PointData[],
         borderColor: "rgba(255, 99, 132, 1)",
         borderWidth: 2,
         showLine: true,
@@ -84,6 +107,9 @@ function LinearRegressionChart() {
   const handleReset = () => {
     setPm25(defaultPm25);
     setCov(defaultCov);
+    setSlope(null);
+    setIntercept(null);
+    setPredictions([]);
   };
 
   return (
@@ -111,7 +137,10 @@ function LinearRegressionChart() {
         </Flex>
 
         <Flex gap="middle">
-          <Button onClick={() => setShowChart(true)}>Показать график</Button>
+          <Button onClick={() => {
+            runPythonCode();
+            setShowChart(true);
+          }}>Показать график</Button>
           <Button onClick={handleReset}>Сбросить к дефолтным значениям</Button>
         </Flex>
       </Flex>
