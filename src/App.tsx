@@ -2,7 +2,8 @@ import React from 'react';
 import './App.css';
 // import { RandomCat } from './pages/randomCat';
 // import LinearRegressionChart from './pages/linRegChart';
-import LinearRegressionPlot from './pages/linRegPlot';
+// import LinearRegressionPlot from './pages/linRegPlot';
+import { TextSender } from './pages/textSender';
 
 function App() {
 
@@ -12,7 +13,8 @@ function App() {
       </header>
         {/* <RandomCat /> */}
         {/* <LinearRegressionChart /> */}
-        <LinearRegressionPlot />
+        {/* <LinearRegressionPlot /> */}
+        <TextSender />
     </div>
   );
 }
